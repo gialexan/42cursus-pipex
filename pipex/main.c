@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:57:13 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/03 21:38:38 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/04 18:18:41 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,21 @@ void	clear(char **array, char *str)
 		ft_free((void *)&str);
 }
 
-void	check_error(int file, int function, char *cmd)
+void	check_error(t_data *data, int file, int function, char *cmd)
 {
-	if (file == -1)
+	if (file == -1 && function == -1)
+	{
+		write(2, ": command not found\n", 20);
+		clear(data->cmd, data->path);
+		clear(data->paths, NULL);
+		exit(127);
+	}
+	else if (file == -1)
 	{
 		perror("");
 		exit(1);
 	}
-	if (function == -1)
+	else if (function == -1)
 	{
 		write(2, cmd, ft_strlen(cmd));
 		write(2, ": Error executing command\n", 26);
@@ -37,11 +44,11 @@ void	check_error(int file, int function, char *cmd)
 void	open_files(t_data *data)
 {
 	data->file[0] = open(data->argv[1], O_WRONLY, 0777);
-	check_error(data->file[0], 0, NULL);
+	check_error(data, data->file[0], 0, NULL);
 	if (data->file[1] == -1)
 		data->file[1] = open(data->argv[data->argc - 1],
 						O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	check_error(data->file[1], 0, NULL);
+	check_error(data, data->file[1], 0, NULL);
 }
 
 void	init_data(t_data *data, int argc, char **argv, char **envp)
@@ -102,10 +109,10 @@ int	find_cmd(t_data *data)
 	while (data->paths[++i])
 	{
 		tmp_path = ft_strjoin(data->paths[i], "/"); //arrumar path com comando
-		full_path = ft_strjoin(tmp_path, data->cmd[0]);
+		full_path = ft_strjoin(tmp_path, data->cmd[0]); //caindo aqui, por causa strlen
 		ft_free((void *)&tmp_path);
-		if (!access(full_path, F_OK))
-		{
+		if (!access(full_path, F_OK | X_OK))
+		{		
 			data->path = full_path;
 			return (1);
 		}
@@ -140,25 +147,22 @@ void	exec_child(t_data *data)
 	int fd[2];
 	int	status;
 
-	check_error(0, pipe(fd), "pipe"); //verifica erro ao abrir pipe
+	check_error(data, 0, pipe(fd), "pipe"); //verifica erro ao abrir pipe
 	pid = fork();
-	check_error(0, pid, "fork"); //verifica erro ao iniciar fork
+	check_error(data, 0, pid, "fork"); //verifica erro ao iniciar fork
 	if (pid == 0) //processo filho
 	{
 		close(fd[0]); // fechando leitura pipe pq n vou lê nd
 		close(data->file[1]); // fechando escritor do arquivo pq n vou escrever nd
 		dup2(data->file[0], STDIN_FILENO); // aponta que file descriptor de leitura do arquivo é o file descriptor de entrada dados
 		dup2(fd[1], STDOUT_FILENO); //aponta que STDOUT(saida principal) seja a do pipe
+		if (ft_strlen(data->cmd[0]) == 0)
+			check_error(data, -1, -1, NULL);
 		execve(data->path, data->cmd, NULL);
 	}
 	close(fd[1]); //fecha file descriptor do escrita do pipe
 	waitpid(pid, &status, 0); // processo pai espera
 	clear(data->cmd, data->path);
-	if (status)
-	{
-		clear(data->paths, NULL);
-		exit(1);
-	}
 	data->file[0] = fd[0];
 }
 
@@ -168,11 +172,13 @@ void	exec_father(t_data *data)
 	int	status;
 
 	pid = fork();
-	check_error(0, pid, "fork");
+	check_error(data, 0, pid, "fork");
 	if (pid == 0)
 	{
 		dup2(data->file[0], STDIN_FILENO);
 		dup2(data->file[1], STDOUT_FILENO);
+		if (ft_strlen(data->cmd[0]) == 0)
+			check_error(data, -1, -1, NULL);
 		execve(data->path, data->cmd, NULL);
 	}
 	waitpid(pid, &status, 0);
@@ -180,21 +186,19 @@ void	exec_father(t_data *data)
 	close(data->file[1]);
 	clear(data->cmd, data->path);
 	clear(data->paths, NULL);
-	if (status)
-		exit(1);
 }
 
 void	start_pipex(t_data *data)
 {
-	while ((data->index + 2) < data->argc)
+	while ((data->index) < data->argc - 2)
 	{
-		if (find_cmd(data) == 1)
+		if (find_cmd(data))
 			exec_child(data);
 	}
-	if (find_cmd(data) == 0)
+	if (!find_cmd(data))
 	{
 		clear(data->paths, NULL);
-		exit (1);
+		exit (127); // comando não existe.
 	}
 	exec_father(data);
 	exit(0);

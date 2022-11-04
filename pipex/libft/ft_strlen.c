@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/31 14:17:55 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/04 13:46:18 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/04 15:04:00 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,12 @@ size_t	ft_strlen(const char *s)
 {
 	size_t	i;
 
-	i = 0;
-	while (s[i])
-		i++;
-	return (i);
+	if (s) {
+		i = 0;
+		while (s[i])
+			i++;
+		return (i);
+	} else {
+		return (0);
+	}
 }
