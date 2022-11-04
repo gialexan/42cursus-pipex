@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:00:07 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/03 19:11:12 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/04 22:01:12 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,9 @@ typedef struct	s_data
 	int		index;
 	
 }	t_data;
+
+void	start_pipex(t_data *data);
+void	clear(char **array, char *str)
+void	check_error(t_data *data, int file, int function, char *cmd)
 
 #endif
