@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:00:07 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 14:19:08 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 15:27:10 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,13 @@ typedef struct s_data
 	char	*access;
 	int		file[2];
 	int		index;
-	int		test;
 }	t_data;
 
 int		find_cmd(t_data *data);
 void	start_pipex(t_data *data);
 void	create_path(t_data *data);
 void	clear(char **array, char *str);
-void	check_error(t_data *data, int function, char *cmd);
+void	check_error(int function, char *cmd);
 void	check_file(t_data *data, int file_index, int file);
 
 #endif

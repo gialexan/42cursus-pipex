@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:54:18 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 14:20:41 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:31:44 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,8 @@ void	clear(char **array, char *str)
 		ft_free((void *)&str);
 }
 
-void	check_error(t_data *data, int function, char *cmd)
+void	check_error(int function, char *cmd)
 {
-	data->test = 1;
 	if (function == -1)
 	{
 		write(2, cmd, ft_strlen(cmd));

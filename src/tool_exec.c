@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:55:57 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 14:26:51 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:07:10 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static	void	exec_child(t_data *data)
 	int	pid;
 	int	fd[2];
 
-	check_error(data, 0, pipe(fd), "pipe");
+	check_error(pipe(fd), "pipe");
 	pid = fork();
-	check_error(data, 0, pid, "fork");
+	check_error(pid, "fork");
 	if (pid == 0)
 	{
 		close(fd[0]);
@@ -48,7 +48,7 @@ static	void	exec_father(t_data *data)
 	int	pid;
 
 	pid = fork();
-	check_error(data, 0, pid, "fork");
+	check_error(pid, "fork");
 	if (pid == 0)
 	{
 		dup2(data->file[0], STDIN_FILENO);

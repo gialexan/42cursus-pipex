@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:52:20 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 14:22:20 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 16:11:25 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,7 @@ void	create_path(t_data *data)
 		{
 			envp_paths = ft_strchr(data->envp[i], '/');
 			data->paths = ft_split(envp_paths, ':');
+			envp_paths =  NULL;
 			return ;
 		}
 	}
