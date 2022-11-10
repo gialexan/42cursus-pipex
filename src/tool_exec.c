@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:55:57 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 16:07:10 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:26:48 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ static	void	exec_child(t_data *data)
 		dup2(fd[1], STDOUT_FILENO);
 		if (data->path != NULL)
 			execve(data->path, data->cmd, NULL);
-		else 
+		else
 		{
 			clear(data->cmd, data->path);
 			clear(data->paths, NULL);
 			exit(127);
 		}
-		// if (ft_strlen(data->cmd[0]) == 0)
-		// 	check_error(data, -1, -1, NULL);
 	}
 	close(fd[1]);
 	waitpid(pid, NULL, 0);
@@ -53,8 +51,6 @@ static	void	exec_father(t_data *data)
 	{
 		dup2(data->file[0], STDIN_FILENO);
 		dup2(data->file[1], STDOUT_FILENO);
-		// if (ft_strlen(data->cmd[0]) == 0)
-		// 	check_error(data, -1, -1, NULL);
 		if (data->path != NULL)
 			execve(data->path, data->cmd, NULL);
 		else
@@ -81,6 +77,7 @@ void	start_pipex(t_data *data)
 	if (!find_cmd(data))
 	{
 		clear(data->paths, NULL);
+		clear(data->cmd, NULL);
 		exit (127);
 	}
 	exec_father(data);

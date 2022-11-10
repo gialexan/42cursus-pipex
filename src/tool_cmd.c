@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:52:20 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 16:11:25 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:27:24 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,11 @@ static	void	get_cmd(t_data *data)
 	char	*tmp;
 
 	i = -1;
-	format_cmd(&data->argv[data->index], 32, 1);
+	format_cmd(&data->argv[data->index], 32, 65);
 	data->cmd = ft_split(data->argv[data->index], ' ');
 	while (data->cmd[++i])
 	{
-		format_cmd(&data->argv[data->index], 1, 32);
+		format_cmd(&data->cmd[i], 65, 32);
 		tmp = data->cmd[i];
 		data->cmd[i] = ft_strtrim(tmp, "'");
 		ft_free((void *)&tmp);
@@ -71,7 +71,6 @@ int	find_cmd(t_data *data)
 	}
 	write(2, data->cmd[0], ft_strlen(data->cmd[0]));
 	write(2, ": command not found\n", 20);
-	//clear(data->cmd, NULL);
 	data->path = NULL;
 	return (0);
 }
@@ -89,7 +88,7 @@ void	create_path(t_data *data)
 		{
 			envp_paths = ft_strchr(data->envp[i], '/');
 			data->paths = ft_split(envp_paths, ':');
-			envp_paths =  NULL;
+			envp_paths = NULL;
 			return ;
 		}
 	}

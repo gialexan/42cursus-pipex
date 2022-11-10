@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:54:18 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 14:31:44 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:26:14 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ void	check_file(t_data *data, int file_index, int file)
 	if (file_index == 0 && file == -1)
 	{
 		if (!access(data->argv[1], F_OK))
-	 		exit(EXIT_SUCCESS);
+			exit(EXIT_SUCCESS);
 		else
-	   		exit(EXIT_FAILURE);
+			exit(EXIT_FAILURE);
 	}
 	else if (file_index == 1 && file == -1)
 		exit(EXIT_FAILURE);
-		
 }
