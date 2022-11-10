@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:57:13 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 14:17:37 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 17:42:16 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,16 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	data;
 
-	if (argc >= 5)
+	if (argc != 5)
+	{
+		write(2, "Invalid arguments\n", 18);
+		exit(EXIT_FAILURE);
+	}
+	else
 	{
 		init_data(&data, argc, argv, envp);
 		create_path(&data);
 		start_pipex(&data);
-	}
-	else
-	{
-		write(2, "Invalid arguments\n", 18);
-		exit(EXIT_FAILURE);
 	}
 	return (0);
 }

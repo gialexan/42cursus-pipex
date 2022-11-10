@@ -5,22 +5,32 @@
 #                                                     +:+ +:+         +:+      #
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/04 22:41:07 by gialexan          #+#    #+#              #
-#    Updated: 2022/11/09 19:45:52 by gialexan         ###   ########.fr        #
+#    Created: 2022/11/10 17:56:12 by gialexan          #+#    #+#              #
+#    Updated: 2022/11/10 18:06:55 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = 				pipex
 
-SRC_FILE = 			pipex.c tool_cmd.c tool_destroy.c tool_exec.c
+NAME_BONUS =		pipex_bonus
+
+SRC_FILE = 			pipex.c cmd.c destroy.c exec.c
+
+SRC_FILE_BONUS =	pipex_bonus.c cmd_bonus.c destroy_bonus.c exec_bonus.c
 
 SRC_DIR = 			src
+
+SRC_DIR_BONUS =		src_bonus
 
 LIBFT_DIR = 		libft
 
 SRC = 				$(addprefix $(SRC_DIR)/, $(SRC_FILE))
 
+SRC_BONUS =			$(addprefix $(SRC_DIR_BONUS)/, $(SRC_FILE_BONUS))
+
 SRC_OBJ = 			$(SRC:.c=.o)
+
+SRC_OBJ_BONUS =		$(SRC_BONUS:.c=.o)
 
 LIBFT = 			./libft/libft.a
 
@@ -30,10 +40,15 @@ CFLAGS = 			-Wall -Wextra -Werror -g
 
 CC = 				cc $(CFLAGS)
 
-all: $(NAME)
+all:	$(NAME)
+
+bonus:	$(NAME_BONUS)
 
 $(NAME):			$(LIBFT) $(SRC_OBJ)
 					$(CC) $(SRC_OBJ) $(LIBFT) -o $(NAME)
+
+$(NAME_BONUS):		$(LIBFT) $(SRC_OBJ_BONUS)
+					$(CC) $(SRC_OBJ_BONUS) $(LIBFT) -o $(NAME_BONUS)
 
 $(LIBFT):
 					$(MAKE) -C $(LIBFT_DIR)
@@ -41,10 +56,12 @@ $(LIBFT):
 clean:
 					$(MAKE) clean -C $(LIBFT_DIR)
 					$(RM) $(SRC_OBJ)
+					$(RM) $(SRC_OBJ_BONUS)
 					
 fclean:				clean
 					$(MAKE) fclean -C $(LIBFT_DIR)
 					$(RM) $(NAME)
+					$(RM) $(NAME_BONUS)
 
 re:					fclean all
 
@@ -87,4 +104,4 @@ test10:				$(NAME)
 					< file1 cat | pr > file2
 					valgrind ./pipex infile "cat" "pr" outfile
 
-.PHONY:				all clean fclean re libft minilibx
+.PHONY:				all clean fclean re libft
