@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:52:20 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/09 18:36:14 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:22:20 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ int	find_cmd(t_data *data)
 		tmp_path = ft_strjoin(data->paths[i], "/");
 		full_path = ft_strjoin(tmp_path, data->cmd[0]);
 		ft_free((void *)&tmp_path);
-		if (!access(full_path, F_OK))
+		if (!access(full_path, X_OK))
 		{
 			data->path = full_path;
 			return (1);
@@ -71,7 +71,8 @@ int	find_cmd(t_data *data)
 	}
 	write(2, data->cmd[0], ft_strlen(data->cmd[0]));
 	write(2, ": command not found\n", 20);
-	clear(data->cmd, NULL);
+	//clear(data->cmd, NULL);
+	data->path = NULL;
 	return (0);
 }
 

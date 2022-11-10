@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/04 22:41:07 by gialexan          #+#    #+#              #
-#    Updated: 2022/11/09 19:26:07 by gialexan         ###   ########.fr        #
+#    Updated: 2022/11/09 19:45:52 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -57,7 +57,7 @@ test2:				$(NAME)
 					valgrind ./pipex infile "ls -l" "wc -l" outfile
 					
 test3:				$(NAME)
-					./pipex infile "grep a1" "wc -w" outfile
+					< file1 grep a1 | wc -w > file2
 					valgrind ./pipex infile "grep a1" "wc -w" outfile
 					
 test4:				$(NAME)

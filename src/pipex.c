@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 14:57:13 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/09 18:35:17 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/10 14:17:37 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static	void	open_files(t_data *data)
 {
-	data->file[0] = open(data->argv[1], O_RDONLY, 0777);
-	check_error(data, data->file[0], 0, NULL);
 	data->file[1] = open (data->argv[data->argc - 1],
 			O_WRONLY | O_CREAT | O_TRUNC, 0777);
-	check_error(data, data->file[1], 0, NULL);
+	check_file(data, 1, data->file[1]);
+	data->file[0] = open(data->argv[1], O_RDONLY, 0777);
+	check_file(data, 0, data->file[0]);
 }
 
 static	void	init_data(t_data *data, int argc, char **argv, char **envp)
