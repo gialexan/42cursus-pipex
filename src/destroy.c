@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   tool_destroy.c                                     :+:      :+:    :+:   */
+/*   destroy.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/04 19:54:18 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 17:26:14 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/11 16:03:44 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,15 @@ void	check_file(t_data *data, int file_index, int file)
 	if (file_index == 0 && file == -1)
 	{
 		if (!access(data->argv[1], F_OK))
+		{
+			write(2, ": Error permission denied\n", 26);
 			exit(EXIT_SUCCESS);
+		}
 		else
+		{
+			write(2, ": Error no such file or directory\n", 34);
 			exit(EXIT_FAILURE);
+		}
 	}
 	else if (file_index == 1 && file == -1)
 		exit(EXIT_FAILURE);

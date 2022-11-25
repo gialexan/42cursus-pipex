@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 17:56:12 by gialexan          #+#    #+#              #
-#    Updated: 2022/11/10 18:14:17 by gialexan         ###   ########.fr        #
+#    Updated: 2022/11/10 23:51:29 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,7 +32,7 @@ SRC_OBJ = 			$(SRC:.c=.o)
 
 SRC_OBJ_BONUS =		$(SRC_BONUS:.c=.o)
 
-LIBFT = 			./libft/libft.a]
+LIBFT = 			./libft/libft.a
 
 RM = 				rm -f
 

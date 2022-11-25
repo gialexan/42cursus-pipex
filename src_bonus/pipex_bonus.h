@@ -6,7 +6,7 @@
 /*   By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 15:00:07 by gialexan          #+#    #+#             */
-/*   Updated: 2022/11/10 17:40:22 by gialexan         ###   ########.fr       */
+/*   Updated: 2022/11/11 15:56:12 by gialexan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define PIPEX_BONUS_H
 
 # include <unistd.h>
-# include <stdio.h>
 # include <fcntl.h>
 # include <errno.h>
 # include <sys/wait.h>
