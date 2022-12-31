@@ -6,7 +6,7 @@
 #    By: gialexan <gialexan@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/10 17:56:12 by gialexan          #+#    #+#              #
-#    Updated: 2022/11/10 23:51:29 by gialexan         ###   ########.fr        #
+#    Updated: 2022/12/31 10:24:44 by gialexan         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,42 +66,42 @@ fclean:				clean
 re:					fclean all
 
 test1:				$(NAME)
-					< file1 ls -la | wc -l > file2
+					< infile ls -la | wc -l > outfile
 					valgrind ./pipex infile "ls -la" "wc -l" outfile
 					
 test2:				$(NAME)
-					< file1 ls -l | wc -l > file2
+					< infile ls -l | wc -l > outfile
 					valgrind ./pipex infile "ls -l" "wc -l" outfile
 					
 test3:				$(NAME)
-					< file1 grep a1 | wc -w > file2
+					< infile grep a1 | wc -w > outfile
 					valgrind ./pipex infile "grep a1" "wc -w" outfile
 					
 test4:				$(NAME)
-					< file1 tr a b | tr b c > file2
+					< infile tr a b | tr b c > outfile
 					valgrind ./pipex infile "tr a b" "tr b c" outfile 
 					
 test5:				$(NAME)
-					< file1 cat | wc -l > file2
+					< infile cat | wc -l > outfile
 					valgrind ./pipex infile "cat" "wc -l" outfile 
 test6:				$(NAME)
-					< file1 grep a | wc -l > file2
+					< infile grep a | wc -l > outfile
 					valgrind ./pipex infile "grep a" "wc -l" outfile
 					
 test7:				$(NAME)
-					< file1 pwd | tr o b > file2
+					< infile pwd | tr o b > outfile
 					valgrind ./pipex infile "pwd" " tr o b" outfile
 
 test8:				$(NAME)
-					< file1 sort | uniq -c > file2
+					< infile sort | uniq -c > outfile
 					valgrind ./pipex infile "sort" "uniq -c" outfile
 
 test9:				$(NAME)
-					< file1 sort -r | head -3 > file2
+					< infile sort -r | head -3 > outfile
 					valgrind ./pipex infile "sort -r" "head -3" outfile
 					
 test10:				$(NAME)
-					< file1 cat | pr > file2
+					< infile cat | pr > outfile
 					valgrind ./pipex infile "cat" "pr" outfile
 
 .PHONY:				all clean fclean re libft
