@@ -2,7 +2,7 @@
 This project consists of reproducing the behavior of the [shell pipe](https://www.geeksforgeeks.org/piping-in-unix-or-linux/).
 
 ### What is pipex?
-Pipex is an individual project at [42](https://www.42sp.org.br/) that requires us to create a program that simulates the behavior of the [shell pipe](https://www.geeksforgeeks.org/piping-in-unix-or-linux/). To build the program it is necessary to create child processes using [fork()](https://www.geeksforgeeks.org/fork-system-call/) communicating with the parent process through [pipe()](https://www.geeksforgeeks.org/pipe-system-call/), manipulate the environment variable test if the command exists or has execution permission, print errors to [STDERR] when necessary, returning the correct [status code](https://www.geeksforgeeks.org/exit-codes-in-c-c-with-examples/).
+Pipex is an individual project at [42](https://www.42sp.org.br/) that requires us to create a program that simulates the behavior of the [shell pipe](https://www.geeksforgeeks.org/piping-in-unix-or-linux/). To build the program it is necessary to create child processes using [fork()](https://www.geeksforgeeks.org/fork-system-call/) communicating with the parent process through [pipe()](https://www.geeksforgeeks.org/pipe-system-call/), manipulate the environment variable testing if the command exists or has execution permission, print errors to [STDERR] when necessary, returning the correct [status code](https://www.geeksforgeeks.org/exit-codes-in-c-c-with-examples/).
 
 #### Badge
 <img src="pipexm.png" width="150" height="150"/>
