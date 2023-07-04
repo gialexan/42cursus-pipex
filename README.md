@@ -21,7 +21,7 @@ Pipex is an individual project at [42](https://www.42sp.org.br/) that requires u
 **Follow the steps below**
 ```bash
 # Clone the project and access the folder
-git clone https://github.com/gialexan/pipex-42 && cd pipex-42/
+git clone https://github.com/gialexan/42cursus-pipex && cd 42cursus-pipex/
 # Create a file to use in program input
 echo "wwwwwwwxxxxxxxyyyyyyyyyzzzzzzz" > infile
 # Run make so you can build the library
