@@ -40,3 +40,12 @@ cat outfile
 make fclean
 # Well done!
 ```
+
+## Updating
+
+The project is regularly updated with bug fixes and code optimization.
+
+---
+
+Made by:<br />
+Gilmar Alexandro Romani 👋 [See my linkedin](https://www.linkedin.com/in/gilmar-romani/)
